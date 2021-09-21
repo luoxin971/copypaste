@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.copypaste.mapper.ContentMapper">
+
+    <insert id="insertContent" >
+        insert into copypaste.content (text, ip, browser) value (#{text}, inet_aton(#{ip}), #{browser});
+    </insert>
+
+    <select id="findById" resultType="content">
+        select id, text, created_time as createdTime, updated_time as updatedTime, inet_ntoa(ip) as ip, browser from copypaste.content where id = #{id} limit 1
+    </select>
+
+    <select id="findAllContent" resultType="content">
+        select id, text, created_time as createdTime, updated_time as updatedTime, inet_ntoa(ip) as ip, browser from copypaste.content
+    </select>
+</mapper>
